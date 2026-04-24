@@ -1,6 +1,8 @@
 package arvorebinaria;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ArvoreBinaria<T> extends ArvoreBinariaBase<T> {
     
@@ -147,5 +149,66 @@ public class ArvoreBinaria<T> extends ArvoreBinariaBase<T> {
         return 1 + Math.max(alturaEsquerda, alturaDireita);
     }
 
-    
+    // percorre a arvore por nivel 
+    @Override
+    public String caminharEmNivel() {
+        if (raiz == null) {
+            return "[]";
+        }
+
+        StringBuilder resultado = new StringBuilder("[");
+        Queue<No<T>> fila = new LinkedList<>();
+        fila.add(raiz);
+
+        while (!fila.isEmpty()) {
+            int tamanhoNivel = fila.size();
+            StringBuilder nivelAtual = new StringBuilder();
+
+            // processa todos os nos do nivel atual
+            for (int i = 0; i < tamanhoNivel; i++) {
+                No<T> noAtual = fila.poll();
+                
+                if (nivelAtual.length() > 0) {
+                    nivelAtual.append(", ");
+                }
+                nivelAtual.append(noAtual.getValor().toString());
+
+                // adiciona os filhos na fila pro proximo nivel
+                if (noAtual.getNoEsquerdo() != null) {
+                    fila.add(noAtual.getNoEsquerdo());
+                }
+                if (noAtual.getNoDireito() != null) {
+                    fila.add(noAtual.getNoDireito());
+                }
+            }
+
+            resultado.append("\n").append(nivelAtual);
+        }
+
+        resultado.append("\n]");
+        return resultado.toString();
+    }
+
+    // caminhamento em ordem: esquerda -> raiz -> direita
+    @Override
+    public String caminharEmOrdem() {
+        StringBuilder resultado = new StringBuilder("[");
+        caminharEmOrdemRecursivo(raiz, resultado);
+        
+        if (resultado.length() > 1) {
+            resultado.setLength(resultado.length() - 2); // tira a ultima virgula
+        }
+        
+        resultado.append("]");
+        return resultado.toString();
+    }
+
+    private void caminharEmOrdemRecursivo(No<T> no, StringBuilder resultado) {
+        if (no != null) {
+            caminharEmOrdemRecursivo(no.getNoEsquerdo(), resultado);
+            resultado.append(no.getValor().toString()).append(", ");
+            caminharEmOrdemRecursivo(no.getNoDireito(), resultado);
+        }
+    }
+
 }
