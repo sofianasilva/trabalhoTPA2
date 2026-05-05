@@ -10,6 +10,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
     //construtor recebe o comparador pra saber como ordenar
     public ArvoreAVL(Comparator<T> comparator) {
         super(comparator);
+        this.comparator = comparator;
         this.raiz = null;
     }
     
@@ -74,12 +75,66 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
         return alturaEsquerda - alturaDireita;
     }
 
-    
-    private No<T> balanceararvore(No<T> noAtual){
-        int fatorbalanceamento = getFatorBalanceamento(noAtual);
-
-        //se o fator de balanceamento for maior que 1, a subarvore esquerda é mais alta que a direita, entao tem que rotacionar pra direita
-        if(fatorbalanceamento>1){
-        
+    private No<T> rotacaoEsquerda(No<T> noAtual){
+        No<T> novaRaiz = noAtual.getNoDireito();
+        noAtual.setNoDireito(novaRaiz.getNoEsquerdo());
+        novaRaiz.setNoEsquerdo(noAtual);
+        atualizarAltura(noAtual);
+        atualizarAltura(novaRaiz);
+        return novaRaiz;
     }
+
+    private No<T> rotacaoDireita(No<T> noAtual){
+        No<T> novaRaiz = noAtual.getNoEsquerdo();
+        noAtual.setNoEsquerdo(novaRaiz.getNoDireito());
+        novaRaiz.setNoDireito(noAtual);
+        atualizarAltura(noAtual);
+        atualizarAltura(novaRaiz);
+        return novaRaiz;
+    }
+
+    private No<T> rotacaoDireitaEsquerda(No<T> noAtual){
+        noAtual.setNoDireito(rotacaoDireita(noAtual.getNoDireito()));
+        return rotacaoEsquerda(noAtual);
+    }
+
+    private No<T> rotacaoEsquerdaDireita(No<T> noAtual){
+        noAtual.setNoEsquerdo(rotacaoEsquerda(noAtual.getNoEsquerdo()));
+        return rotacaoDireita(noAtual);
+    }
+
+
+
+    
+    private No<T> balanceararvore(No<T> noAtual) {
+        int fb = getFatorBalanceamento(noAtual);
+
+        // CASO 1: Pendente para a Esquerda (FB > 1)
+        if (fb > 1) {
+            // Verifica o filho ESQUERDO
+            if (getFatorBalanceamento(noAtual.getNoEsquerdo()) >= 0) {
+                // Caso LL (Linha reta à esquerda)
+                return rotacaoDireita(noAtual);
+            } else {
+                // Caso LR (Joelho à esquerda)
+                return rotacaoEsquerdaDireita(noAtual);
+            }
+        }
+
+        // CASO 2: Pendente para a Direita (FB < -1)
+        if (fb < -1) {
+            // Verifica o filho DIREITO
+            if (getFatorBalanceamento(noAtual.getNoDireito()) <= 0) {
+                // Caso RR (Linha reta à direita)
+                return rotacaoEsquerda(noAtual);
+            } else {
+                // Caso RL (Joelho à direita)
+                return rotacaoDireitaEsquerda(noAtual);
+            }
+        }
+
+        // Se não precisar de balanceamento, retorna o próprio nó
+        return noAtual;
+    }
+
 }
