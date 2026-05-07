@@ -19,7 +19,7 @@ public class MainJavaTree {
 
         Scanner s = new Scanner(System.in);
 
-        // Menu
+        // menu
         do {
             System.out.println("=== SISTEMA DE FUNCIONÁRIOS (TreeMap - Java) ===");
             System.out.println("Escolha uma opcao");
