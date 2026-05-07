@@ -8,7 +8,7 @@ public class MainJavaTree {
 
     public static void main(String[] args) {
         // treemap usa cpf como chave e funcionario como valor
-        // o comparator compara os cpfs para manter a arvore ordenada
+        // o comparator compara os cpf para manter a arvore ordenada
         TreeMap<Long, Funcionario> funcionarios = new TreeMap<>();
         
         Funcionario func;
