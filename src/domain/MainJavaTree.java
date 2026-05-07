@@ -4,27 +4,11 @@ import java.util.Comparator;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-/**
- * Versão do aplicativo usando a estrutura de árvore padrão do Java (TreeMap).
- * 
- * TreeMap é uma implementação de Map baseada em Red-Black Tree (árvore rubro-negra),
- * que é uma árvore binária de busca auto-balanceada. Ela mantém os elementos ordenados
- * de acordo com a ordem natural das chaves ou por um Comparator fornecido.
- * 
- * Complexidade das operações no TreeMap:
- * - Inserção (put): O(log n)
- * - Busca (get): O(log n)
- * - Remoção (remove): O(log n)
- * - Tamanho (size): O(1)
- * 
- * A árvore Red-Black garante que a altura da árvore seja sempre O(log n),
- * evitando degeneração mesmo com inserções ordenadas.
- */
 public class MainJavaTree {
 
     public static void main(String[] args) {
-        // TreeMap usa CPF como chave e Funcionario como valor
-        // O Comparator compara os CPFs (chaves) para manter a árvore ordenada
+        // treemap usa cpf como chave e funcionario como valor
+        // o comparator compara os cpfs para manter a arvore ordenada
         TreeMap<Long, Funcionario> funcionarios = new TreeMap<>();
         
         Funcionario func;
