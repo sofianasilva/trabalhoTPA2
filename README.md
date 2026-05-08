@@ -1,155 +1,175 @@
-Trabalho de TPA – Árvores Binárias e Análise de complexidade
+# Trabalho de TPA – Árvores Binárias
 
-Este repositório contém a implementação prática e a análise de complexidade referentes ao trabalho sobre Árvores Binárias, desenvolvido para a disciplina de Técnicas de Programação Avançada (TPA).
+Implementação de biblioteca de árvores binárias em Java e análise de complexidade.
 
-🎯 Objetivos do Trabalho
+## 📁 Estrutura do Projeto
 
-O projeto teve como objetivos principais:
-
-    Implementação de uma biblioteca de listas encadeadas genéricas em Java utilizando Generics.
-    Desenvolvimento de métodos essenciais para manipulação de listas:
-        adicionar(T novoValor)
-        pesquisar(T valor)
-        remover(T valor)
-        quantidadeNos()
-    Criação de um programa interativo para testar a biblioteca com objetos do tipo Funcionario.
-    Análise matemática de complexidade dos métodos implementados.
-    Análise empírica com medições de desempenho usando arquivos de teste de diferentes tamanhos.
-    Estudo das estruturas nativas do Java (ArrayList e LinkedList), avaliando:
-        Funcionamento interno
-        Complexidade teórica das operações
-        Resultados empíricos comparativos
-
-🧩 Estrutura do Repositório
-
-A organização dos arquivos foi feita de forma a facilitar a navegação e a execução dos testes:
-
+```
 src/
-├── parte1/
-│   └── domain/
-│       └── Main.java                           # Programa de teste inicial
+├── arvorebinaria/
+│   ├── ArvoreBinaria.java          # Árvore binária simples
+│   ├── ArvoreBinariaBase.java      # Classe base
+│   └── No.java                     # Nó da árvore
 │
-└── parte2/
-    ├── colecao/
-    │   └── IColecao.java                       # Interface da coleção
-    │
-    ├── domain/
-    │   ├── Funcionario.java                    # Classe modelo 
-    │   ├── Main.java                           # Programa interativo de teste
-    │   └── LeitorArquivos.java                 # Programa de análise empírica
-    │
-    ├── src/
-    │   ├── ListaEncadeada.java                 # Implementação da lista encadeada
-    │   ├── ListaEncadeadaArrayList.java        # ArrayList
-    │   ├── ListaEncadeadaLinkedList.java       # LinkedList
-    │   └── No.java                             # Classe nó da lista
-    │
-    └── testes/
-        ├── funcionarios100k.txt                # Arquivo de teste (100k registros)
-        ├── funcionarios200k.txt                # Arquivo de teste (200k registros)
-        ├── funcionarios400k.txt                # Arquivo de teste (400k registros)
-        └── GeradorArquivosOrdenados.java       # Gerador de arquivos de teste
-
-📚 Implementação
-
-A lista encadeada foi projetada para ser genérica e reutilizável, aceitando qualquer tipo de objeto através de Generics.
-
-A classe Funcionario representa o domínio escolhido para os testes, contendo:
-
-    Nome
-    CPF (usado para comparação no método equals())
-    Salário
-
-A biblioteca implementa a interface IColecao<T>, garantindo que todas as implementações (ListaEncadeada, ArrayList e LinkedList) sigam o mesmo contrato.
-
-### Implementações de Árvores Binárias
-
-O projeto também inclui implementações de árvores binárias:
-
-- **ArvoreBinaria**: Árvore binária de busca simples (pode degenerar)
-- **ArvoreAVL**: Árvore binária auto-balanceada (mantém altura O(log n))
-- **MainTreeSet**: Versão usando TreeSet da biblioteca padrão do Java
-
-### Versão com TreeSet (Biblioteca Padrão do Java)
-
-Foi implementada uma versão do aplicativo usando **TreeSet**, que é baseado em Red-Black Tree:
-
-```java
-TreeSet<Funcionario> funcionarios = new TreeSet<>(
-    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
-);
+├── arvoreAVL/
+│   └── ArvoreAVL.java              # Árvore AVL (auto-balanceada)
+│
+├── colecao/
+│   └── IColecao.java               # Interface da coleção
+│
+├── domain/
+│   ├── Funcionario.java            # Classe de domínio
+│   ├── Main.java                   # App com ArvoreBinaria
+│   └── MainTreeSet.java            # App com TreeSet (Java)
+│
+└── testes/
+    ├── funcionariosBalanceados100k.txt
+    ├── funcionariosBalanceados500k.txt
+    ├── funcionariosBalanceados1Mi.txt
+    ├── funcionariosOrdenados100k.txt
+    ├── funcionariosOrdenados500k.txt
+    └── funcionariosOrdenados1Mi.txt
 ```
 
-**Características do TreeSet:**
-- Auto-balanceamento garantido (Red-Black Tree)
-- Complexidade O(log n) para inserção, busca e remoção
-- Não permite elementos duplicados
-- Métodos de navegação: `ceiling()`, `floor()`, `first()`, `last()`
+## 🎯 O que foi implementado?
 
-Para executar a versão com TreeSet:
+### 1. Biblioteca de Árvores Binárias
+- **ArvoreBinaria**: Árvore binária de busca simples
+- **ArvoreAVL**: Árvore AVL com auto-balanceamento
+- Usa **Generics** e **Comparator** para flexibilidade
+
+### 2. Aplicativo de Gerenciamento
+Sistema interativo para cadastrar, pesquisar, listar e excluir funcionários.
+
+### 3. Versão com TreeSet
+Implementação usando a estrutura de árvore padrão do Java (Red-Black Tree).
+
+## 🚀 Como Executar
+
+### Versão com ArvoreBinaria
+```bash
+javac src/domain/Funcionario.java src/arvorebinaria/*.java src/colecao/*.java src/domain/Main.java
+java -cp src domain.Main
+```
+
+### Versão com ArvoreAVL
+```bash
+javac src/domain/Funcionario.java src/arvoreAVL/*.java src/arvorebinaria/*.java src/colecao/*.java src/domain/Main.java
+java -cp src domain.Main
+```
+
+### Versão com TreeSet (Java)
 ```bash
 javac src/domain/Funcionario.java src/domain/MainTreeSet.java
 java -cp src domain.MainTreeSet
 ```
-⏳ Análise de Complexidade
 
-Foram analisadas as operações principais da lista encadeada:
-Operação 	Complexidade 	Justificativa
-Adicionar (final) 	O(1) 	Acesso direto ao último nó
-Pesquisar 	O(n) 	Busca linear percorrendo todos os nós
-Remover 	O(n) 	Necessário encontrar o nó anterior
-Quantidade de nós 	O(1) 	Retorna contador mantido internamente
+## 📊 Comparação das Estruturas
 
-Além disso, o trabalho inclui uma comparação entre ArrayList e LinkedList, abordando:
+| Estrutura | Balanceamento | Inserção Ordenada | Permite Duplicatas |
+|-----------|---------------|-------------------|-------------------|
+| **ArvoreBinaria** | ❌ Não | O(n) - degenera | ✅ Sim |
+| **ArvoreAVL** | ✅ Sim | O(log n) | ✅ Sim |
+| **TreeSet** | ✅ Sim (Red-Black) | O(log n) | ❌ Não |
 
-    Busca por elemento
-    Inserções no final
-    Remoções do último elemento
-    Explicando quando cada estrutura é mais eficiente
+### Quando usar cada uma?
 
-🧪 Testes Empíricos
+**ArvoreBinaria**: Apenas para fins didáticos ou quando dados já vêm balanceados
 
-Para validar a análise teórica, foram feitos testes de desempenho com entradas de tamanhos variados (100k, 200k, 400k elementos), medindo:
+**ArvoreAVL**: Quando precisa de controle total e permite duplicatas
 
-    Tempo de leitura e inserção de todos os elementos
-    Tempo de busca pelo último elemento
-    Tempo de busca por elemento inexistente
-    Tempo de remoção do último elemento
-    Tempo de obtenção da quantidade de elementos
+**TreeSet**: Para produção - robusta, testada e com performance garantida
 
-🏗️ Tecnologias Utilizadas
+## 💡 Exemplo de Uso
 
-    Java SE 8+
-    Generics para implementação genérica
-    ArrayList e LinkedList para testes comparativos
-    System.nanoTime() para medições de desempenho
+```java
+// Todas usam Comparator da mesma forma
+IColecao<Funcionario> funcionarios = new ArvoreBinaria<>(
+    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
+);
 
-📌 Como Executar
-1. Clone este repositório:
+// ou
 
-git clone https://github.com/lari-ms/trab-1-tpa.git
-cd trab-1-tpa
+TreeSet<Funcionario> funcionarios = new TreeSet<>(
+    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
+);
 
-2. Compile os arquivos:
+// Operações
+funcionarios.adicionar(new Funcionario("João", 12345678901L, 5000.0f));
+Funcionario f = funcionarios.pesquisar(new Funcionario("", 12345678901L, 0));
+funcionarios.remover(f);
+int total = funcionarios.quantidadeNos(); // ou size() no TreeSet
+```
 
-cd src/parte2
-javac -d bin domain/*.java colecao/*.java src/*.java
+## 📈 Análise de Complexidade
 
-3. Execute o programa interativo:
+### ArvoreBinaria
+- **Melhor caso** (balanceada): O(log n)
+- **Pior caso** (degenerada): O(n)
+- **Depende da ordem de inserção**
 
-java -cp bin domain.Main
+### ArvoreAVL
+- **Sempre**: O(log n)
+- Faz rotações para manter balanceamento
+- Mais rotações que Red-Black
 
-O programa permite cadastrar, pesquisar, visualizar e excluir funcionários.
-4. Execute a análise empírica:
+### TreeSet (Red-Black Tree)
+- **Sempre**: O(log n)
+- Menos rotações que AVL
+- Melhor para uso geral
 
-java -cp bin domain.LeitorArquivos
+## 📝 Arquivos de Teste
 
-Este programa lê um arquivo de teste e exibe os tempos de execução de cada operação.
-📄 Relatório Completo
+Os arquivos na pasta `testes/` contêm funcionários para análise empírica:
 
-O relatório completo com todas as análises matemáticas e empíricas está disponível em: Link para o documento
-👥 Integrantes do Projeto
+- **Balanceados**: Inserção gera árvore balanceada
+- **Ordenados**: Inserção gera árvore degenerada (pior caso)
+- **Tamanhos**: 100k, 500k e 1Mi registros
 
-    Larissa
-    Luma
-    Sofia
+## 🔍 Diferenças Principais
+
+### ArvoreBinaria vs TreeSet
+
+**Semelhanças:**
+- Ambos usam Comparator
+- Sintaxe similar
+
+**Diferenças:**
+- TreeSet não permite duplicatas
+- TreeSet nunca degenera
+- TreeSet tem métodos extras: `ceiling()`, `floor()`, `first()`, `last()`
+
+### Exemplo de Busca
+
+```java
+// ArvoreBinaria
+Funcionario f = funcionarios.pesquisar(new Funcionario("", cpf, 0));
+
+// TreeSet
+Funcionario buscado = new Funcionario("", cpf, 0);
+Funcionario f = funcionarios.ceiling(buscado);
+if (f != null && f.getCpf() == cpf) {
+    // Encontrado
+}
+```
+
+## 📚 Documentação Adicional
+
+- `RELATORIO_SECAO5_TREESET.md` - Análise completa do TreeSet
+- `RESUMO_PARA_ENTREVISTA.md` - Pontos-chave
+- `GUIA_RAPIDO.md` - Instruções rápidas
+
+## 👥 Equipe
+
+- Larissa
+- Luma
+- Sofia
+
+## 📌 Repositório
+
+https://github.com/lari-ms/trab-1-tpa
+
+---
+
+**Disciplina**: Técnicas de Programação Avançada (TPA)  
+**Tema**: Árvores Binárias e Análise de Complexidade
