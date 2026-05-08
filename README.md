@@ -61,6 +61,36 @@ A classe Funcionario representa o domínio escolhido para os testes, contendo:
     Salário
 
 A biblioteca implementa a interface IColecao<T>, garantindo que todas as implementações (ListaEncadeada, ArrayList e LinkedList) sigam o mesmo contrato.
+
+### Implementações de Árvores Binárias
+
+O projeto também inclui implementações de árvores binárias:
+
+- **ArvoreBinaria**: Árvore binária de busca simples (pode degenerar)
+- **ArvoreAVL**: Árvore binária auto-balanceada (mantém altura O(log n))
+- **MainTreeSet**: Versão usando TreeSet da biblioteca padrão do Java
+
+### Versão com TreeSet (Biblioteca Padrão do Java)
+
+Foi implementada uma versão do aplicativo usando **TreeSet**, que é baseado em Red-Black Tree:
+
+```java
+TreeSet<Funcionario> funcionarios = new TreeSet<>(
+    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
+);
+```
+
+**Características do TreeSet:**
+- Auto-balanceamento garantido (Red-Black Tree)
+- Complexidade O(log n) para inserção, busca e remoção
+- Não permite elementos duplicados
+- Métodos de navegação: `ceiling()`, `floor()`, `first()`, `last()`
+
+Para executar a versão com TreeSet:
+```bash
+javac src/domain/Funcionario.java src/domain/MainTreeSet.java
+java -cp src domain.MainTreeSet
+```
 ⏳ Análise de Complexidade
 
 Foram analisadas as operações principais da lista encadeada:
