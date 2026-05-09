@@ -96,11 +96,7 @@ Os arquivos na pasta `testes/` contêm funcionários para análise empírica:
 - Luma
 - Sofia
 
-## 📌 Repositório
+## 📄 Relatório Completo
 
-[https://github.com/lari-ms/trab-1-tpa](https://github.com/sofianasilva/trabalhoTPA2)
-
----
-
-**Disciplina**: Técnicas de Programação Avançada (TPA)  
-**Tema**: Árvores Binárias e Análise de Complexidade
+O relatório completo com todas as análises matemáticas e empíricas está disponível em:
+[Link para o documento]([https://docs.google.com/document/d/1s9j7zC113brwik7d8vEWFbzAqe7uH03om-F15QsihKU/edit?tab=t.0](https://docs.google.com/document/d/1DrJOuXkaV7Xl58u8MXh7q0BON3WFSHSX7K7MxTiUHL0/edit?usp=sharing))
