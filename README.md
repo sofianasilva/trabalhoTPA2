@@ -12,7 +12,7 @@ src/
 │   └── No.java                     # Nó da árvore
 │
 ├── arvoreAVL/
-│   └── ArvoreAVL.java              # Árvore AVL (auto-balanceada)
+│   └── ArvoreAVL.java              # Árvore AVL 
 │
 ├── colecao/
 │   └── IColecao.java               # Interface da coleção
@@ -64,43 +64,6 @@ javac src/domain/Funcionario.java src/domain/MainTreeSet.java
 java -cp src domain.MainTreeSet
 ```
 
-## 📊 Comparação das Estruturas
-
-| Estrutura | Balanceamento | Inserção Ordenada | Permite Duplicatas |
-|-----------|---------------|-------------------|-------------------|
-| **ArvoreBinaria** | ❌ Não | O(n) - degenera | ✅ Sim |
-| **ArvoreAVL** | ✅ Sim | O(log n) | ✅ Sim |
-| **TreeSet** | ✅ Sim (Red-Black) | O(log n) | ❌ Não |
-
-### Quando usar cada uma?
-
-**ArvoreBinaria**: Apenas para fins didáticos ou quando dados já vêm balanceados
-
-**ArvoreAVL**: Quando precisa de controle total e permite duplicatas
-
-**TreeSet**: Para produção - robusta, testada e com performance garantida
-
-## 💡 Exemplo de Uso
-
-```java
-// Todas usam Comparator da mesma forma
-IColecao<Funcionario> funcionarios = new ArvoreBinaria<>(
-    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
-);
-
-// ou
-
-TreeSet<Funcionario> funcionarios = new TreeSet<>(
-    (f1, f2) -> Long.compare(f1.getCpf(), f2.getCpf())
-);
-
-// Operações
-funcionarios.adicionar(new Funcionario("João", 12345678901L, 5000.0f));
-Funcionario f = funcionarios.pesquisar(new Funcionario("", 12345678901L, 0));
-funcionarios.remover(f);
-int total = funcionarios.quantidadeNos(); // ou size() no TreeSet
-```
-
 ## 📈 Análise de Complexidade
 
 ### ArvoreBinaria
@@ -126,38 +89,6 @@ Os arquivos na pasta `testes/` contêm funcionários para análise empírica:
 - **Ordenados**: Inserção gera árvore degenerada (pior caso)
 - **Tamanhos**: 100k, 500k e 1Mi registros
 
-## 🔍 Diferenças Principais
-
-### ArvoreBinaria vs TreeSet
-
-**Semelhanças:**
-- Ambos usam Comparator
-- Sintaxe similar
-
-**Diferenças:**
-- TreeSet não permite duplicatas
-- TreeSet nunca degenera
-- TreeSet tem métodos extras: `ceiling()`, `floor()`, `first()`, `last()`
-
-### Exemplo de Busca
-
-```java
-// ArvoreBinaria
-Funcionario f = funcionarios.pesquisar(new Funcionario("", cpf, 0));
-
-// TreeSet
-Funcionario buscado = new Funcionario("", cpf, 0);
-Funcionario f = funcionarios.ceiling(buscado);
-if (f != null && f.getCpf() == cpf) {
-    // Encontrado
-}
-```
-
-## 📚 Documentação Adicional
-
-- `RELATORIO_SECAO5_TREESET.md` - Análise completa do TreeSet
-- `RESUMO_PARA_ENTREVISTA.md` - Pontos-chave
-- `GUIA_RAPIDO.md` - Instruções rápidas
 
 ## 👥 Equipe
 
@@ -167,7 +98,7 @@ if (f != null && f.getCpf() == cpf) {
 
 ## 📌 Repositório
 
-https://github.com/lari-ms/trab-1-tpa
+[https://github.com/lari-ms/trab-1-tpa](https://github.com/sofianasilva/trabalhoTPA2)
 
 ---
 
