@@ -24,11 +24,11 @@ src/
 │
 └── testes/
     ├── funcionariosBalanceados100k.txt
-    ├── funcionariosBalanceados500k.txt
-    ├── funcionariosBalanceados1Mi.txt
+    ├── funcionariosBalanceados50k.txt
+    ├── funcionariosBalanceados25k.txt
     ├── funcionariosOrdenados100k.txt
-    ├── funcionariosOrdenados500k.txt
-    └── funcionariosOrdenados1Mi.txt
+    ├── funcionariosOrdenados50k.txt
+    └── funcionariosOrdenados25k.txt
 ```
 
 ## 🎯 O que foi implementado?
